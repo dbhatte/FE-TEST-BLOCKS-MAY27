@@ -15,120 +15,19 @@
 		
 		// TODO add more colors
     -->
+	<script src="js/TestUtils.js" ></script>
+    <script src="js/CreateUtils.js" ></script>
+    <script src="js/AnimateUtils.js" ></script>
+    <script src="js/Main.js" ></script>
     <script>
 		window.addEventListener('load', init);
 		
 		
 		function init(){
-			onLoadCallback(500, 50, 50);
+			onLoadCallback(500, 50, 100);
 		}
 	
-		var TestUtils = {
-			validate : function(data) {
-				if (data === undefined || data < 0) {
-					console.log("Error");
-					return -1;
-				}	
-				return 0;
-			},
-		
-			validateSizeConstraint : function (containerSize, childSize, numberOfChildren){
-				var totalArea = containerSize * containerSize;
-				var childArea = numberOfChildren * childSize * childSize;
-				if (childArea > totalArea) {
-					console.log("Children cannot fit in Container");
-					return -1;
-				}
-				return 0;
-			}			
-		
-		}
-		
-		var CreateUtils = {
-		
-			colors : ['red', 'blue', 'green', 'yellow', 'pink'],
-
-			createDivWithDimensions : function (dimension){
-				var element = document.createElement("div");
-				element.style.height = dimension + "px";
-				element.style.width = dimension + "px";
-				return element;
-			},
-			
-			createChildDivWithDimensions : function(id, dimension, clearValue){
-				var element = document.createElement("div");
-				element.id = id;
-				element.style.height = dimension + "px";
-				element.style.width = dimension + "px";
-				element.style.float = 'left';
-				element.style.backgroundColor = this.colors[parseInt(this.colors.length * Math.random(), 10)];
-				return element;
-			}
-			
-		}
-		
-		var AnimateUtils = {
-			startTime : 0,
-			endTime : 0,
-			timeOutVar : null,
-			element : null,
-			childMouseOver : function (event){
-				var date = new Date();
-				this.startTime = date.getTime();
-				this.endTime = date.getTime();
-				element = event.target.id;
-				console.log('Started Hovering over '+element);
-				this.timeOutVar = setTimeout(function(){document.getElementById(element).style.visibility = 'hidden';console.log('Hiding '+element);}, 3000);
-			},
-			
-			childMouseOut : function (event){
-				var date = new Date();
-				this.endTime = date.getTime();
-				if (this.endTime - this.startTime < 3000) {
-					console.log('Cleared Hovering over '+element);				
-					clearTimeout(this.timeOutVar);
-				}
-				this.startTime = 0;
-				this.endTime = 0;
-			}
-		
-		}
-
-		
-		
         
-        var onLoadCallback = function(containerSize, childSize, numberOfChildren) {
-			console.log(containerSize);
-            console.log(childSize);
-            console.log(numberOfChildren);
-			
-			if (TestUtils.validate(containerSize) === -1) return;
-			if (TestUtils.validate(childSize) === -1) return;
-			if (TestUtils.validate(numberOfChildren) === -1) return;
-		
-			if (TestUtils.validateSizeConstraint(containerSize, childSize, numberOfChildren) === -1) return;
-			
-            
-			var container = CreateUtils.createDivWithDimensions(containerSize);
-			var childIndex = 0;
-			var totalChildWidth = 0;
-			for (childIndex = 0; childIndex < numberOfChildren; childIndex++){
-				var clearValue = false;
-				totalChildWidth += childSize;
-				if (totalChildWidth > containerSize) {
-					totalChildWidth = childSize;
-					clearValue = true;
-				}
-				
-				var childElement = CreateUtils.createChildDivWithDimensions('childIndex'+childIndex, childSize, clearValue);
-				
-				childElement.addEventListener('mouseover', AnimateUtils.childMouseOver);
-				childElement.addEventListener('mouseout', AnimateUtils.childMouseOut);
-				container.appendChild(childElement);
-			}
-			
-			document.body.appendChild(container);
-        }
     </script>
 </head>
 <body>
