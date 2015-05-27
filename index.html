@@ -78,7 +78,7 @@
 				this.endTime = date.getTime();
 				element = event.target.id;
 				console.log('Started Hovering over '+element);
-				var timeOutVar = setTimeout(function(){document.getElementById(element).style.visibility = 'hidden';console.log('Hiding '+element);}, 3000);
+				this.timeOutVar = setTimeout(function(){document.getElementById(element).style.visibility = 'hidden';console.log('Hiding '+element);}, 3000);
 			},
 			
 			childMouseOut : function (event){
