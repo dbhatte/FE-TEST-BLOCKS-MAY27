@@ -1,7 +1,7 @@
 /* To create the elements*/
 var CreateUtils = {
 
-	colors : ['red', 'blue', 'green', 'yellow', 'pink'],
+	colors : ['red', 'blue', 'green', 'yellow', 'pink', 'cyan', 'magenta', 'purple', 'orange', 'black', 'brown', 'gray'],
 
 	createDivWithDimensions : function (dimension){
 		var element = document.createElement("div");
